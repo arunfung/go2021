@@ -1,0 +1,15 @@
+package calc
+
+var opers map[string]OperationInterface
+
+func init()  {
+	opers = make(map[string]OperationInterface, 0)
+	opers["-"] = &OperationSub{}
+	opers["+"] = &OperationAdd{}
+	opers["*"] = &OperationMul{}
+	opers["/"] = &OperationDiv{}
+}
+
+func OperationFactory(oper string) OperationInterface {
+	return opers[oper]
+}
