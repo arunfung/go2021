@@ -1,7 +1,7 @@
 package calc
 
 type OperationInterface interface {
-	Exc(a, b int) int
+	Exe(a, b int) int
 }
 
 type OperationAdd struct {}
@@ -9,22 +9,18 @@ type OperationSub struct {}
 type OperationMul struct {}
 type OperationDiv struct {}
 
-func (o *OperationAdd) Exe() int {
-	//return o.oper.num1 + o.oper.num2
-	return 1
+func (o *OperationAdd) Exe(a, b int) int {
+	return a + b
 }
 
-func (o *OperationSub) Exe() int {
-	//return o.oper.num1 - o.oper.num2
-	return 2
+func (o *OperationSub) Exe(a, b int) int {
+	return a - b
 }
 
-func (o *OperationMul) Exe() int {
-	//return o.oper.num1 * o.oper.num2
-	return 3
+func (o *OperationMul) Exe(a, b int) int {
+	return a * b
 }
 
-func (o *OperationDiv) Exe() int {
-	//return o.oper.num1 / o.oper.num2
-	return 4
+func (o *OperationDiv) Exe(a, b int) int {
+	return a / b
 }
