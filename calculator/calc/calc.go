@@ -4,23 +4,23 @@ type OperationInterface interface {
 	Exe(a, b int) int
 }
 
-type OperationAdd struct {}
-type OperationSub struct {}
-type OperationMul struct {}
-type OperationDiv struct {}
+type OAdd struct {}
+type OSub struct {}
+type OMul struct {}
+type ODiv struct {}
 
-func (o *OperationAdd) Exe(a, b int) int {
+func (o *OAdd) Exe(a, b int) int {
 	return a + b
 }
 
-func (o *OperationSub) Exe(a, b int) int {
+func (o *OSub) Exe(a, b int) int {
 	return a - b
 }
 
-func (o *OperationMul) Exe(a, b int) int {
+func (o *OMul) Exe(a, b int) int {
 	return a * b
 }
 
-func (o *OperationDiv) Exe(a, b int) int {
+func (o *ODiv) Exe(a, b int) int {
 	return a / b
 }
