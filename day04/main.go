@@ -23,7 +23,7 @@ func (a *AlPay) Order(id int) int {
 	return 300
 }
 
-func main()  {
+func main1()  {
 	//a :=1
 	//b := &a
 	//fmt.Printf("a:%d ptr: %p t:%T \n", a, &a, a)
