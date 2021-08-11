@@ -15,7 +15,7 @@ func NewUser() *User {
 	return &User{}
 }
 
-func (u *User) SetUserName(username string)  {
+func (u *User) SetUsername(username string)  {
 	u.username = username
 }
 
@@ -29,7 +29,7 @@ func (u *User) SetSex(sex string)  {
 	u.sex = sex
 }
 
-func (u *User) GetUserName() string  {
+func (u *User) GetUsername() string  {
 	return u.username
 }
 func (u *User) GetPassword() string  {

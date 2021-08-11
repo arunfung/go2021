@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"reflect"
+	"strconv"
 	"strings"
 )
 
@@ -14,7 +16,7 @@ type Model interface {
 }
 
 var (
-	path   string                 = "/Users/arun/go/src/go2021/edu/data/" // 数据路径
+	path   string                 = "/Users/arun/go/src/arunfung/go2021/edu/data/" // 数据路径
 	suffix string                 = ".sql"
 	models map[string]interface{} // 记录标识 user =》 结构体
 )
@@ -22,10 +24,10 @@ var (
 func init() {
 	// 标识绑定注册
 	models = make(map[string]interface{})
-	models["user"] = &User{}
+	models["user"] = NewUser
 }
 
-func rfdata(name, pirmay string, datas map[string]Model) error {
+func rfdata(name, primary string, datas map[string]Model) error {
 	f, fErr := os.Open(path + name + suffix)
 	if fErr != nil {
 		fmt.Println("文件读取异常,", fErr)
@@ -52,8 +54,53 @@ func rfdata(name, pirmay string, datas map[string]Model) error {
 		// 根据数据判断操作 ； 是记录字段还是设置数据
 		if len(field) == 0 {
 			field = data // 存储字段
-		} else {}
+			for k, v := range data {
+				field[k] = strings.TrimSpace(strings.TrimSuffix(v, "\n"))
+			}
+		} else {
+			toModel(name, primary, datas, data, field)
+		}
 	}
-	fmt.Println("存储的数据", field)
+	//fmt.Println("存储的数据", field)
 	return nil
+}
+
+func toModel(name string, primary string, datas map[string]Model, data []string, field []string) error {
+	if models[name] == nil {
+		return errors.New("不存在模型 : " + name)
+	}
+	//
+	modelV := reflect.ValueOf(models[name]).Call([]reflect.Value{})[0]
+	//fmt.Printf("modelV type %T \n", modelV)
+	//fmt.Println("data 数据", data)
+	//fmt.Println("field 数据", field)
+
+	var primaryValue string
+	for k, v := range data {
+		if field[k] == primary { // 判断是否为主键字段的值 -》
+			primaryValue = v
+			//fmt.Println("查询的主键值 : ", primaryValue)
+		}
+		fset := modelV.MethodByName("Set" + strings.Title(field[k]))
+		//fmt.Printf("fset type %T \n", fset)
+		//fmt.Println("fset ", fset)
+
+		fset.Call([]reflect.Value{
+			reflect.ValueOf(toTypeValue(modelV, field[k], v)),
+		})
+	}
+	//fmt.Println("model", modelV)
+	datas[primaryValue] = modelV.Interface().(Model)
+
+	return nil
+}
+
+func toTypeValue(modelV reflect.Value, field string, value string) interface{} {
+	mtype := reflect.Zero(modelV.Type().Elem()).FieldByName(field).Type().Name()
+	switch mtype {
+	case "int":
+		b, _ := strconv.Atoi(value)
+		return b
+	}
+	return string(value)
 }
