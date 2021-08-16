@@ -41,6 +41,13 @@ func (u *User) GetAge() int  {
 func (u *User) GetSex() string  {
 	return u.sex
 }
+func GetUser(username string) *User {
+	if userDatas == nil {
+		return nil
+	}
+	return userDatas[username].(*User)
+}
+
 
 func (u *User) ToString() string {
 	return u.username + "," + strconv.Itoa(u.age) + "," + u.sex

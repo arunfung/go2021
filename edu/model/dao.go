@@ -25,6 +25,9 @@ func init() {
 	// 标识绑定注册
 	models = make(map[string]interface{})
 	models["user"] = NewUser
+
+	userDatas = make(map[string]Model, 0)
+	rfdata("user", "username", userDatas)
 }
 
 func rfdata(name, primary string, datas map[string]Model) error {
