@@ -42,7 +42,7 @@ func (u *User) GetSex() string  {
 	return u.sex
 }
 func GetUser(username string) *User {
-	if userDatas == nil {
+	if len(userDatas) == 0 {
 		return nil
 	}
 	return userDatas[username].(*User)
