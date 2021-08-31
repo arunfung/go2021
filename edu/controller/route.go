@@ -19,7 +19,6 @@ func Run() {
 	// 初次访问的方法
 	next = "index::Welcome"
 
-
 	for {
 		flag := util.CReturn(util.Cfunc(dispatch))
 		if flag {
@@ -31,7 +30,7 @@ func Run() {
 
 }
 
-func dispatch() (bool, error){
+func dispatch() (bool, error) {
 	// 1. 获取展示的列表
 	args := strings.Split(next, "::")
 	controller, ok := controllers[args[0]]

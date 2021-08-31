@@ -1,6 +1,7 @@
 package model
 
 import (
+	"arunfung/go2021/edu/util"
 	"bufio"
 	"errors"
 	"fmt"
@@ -16,7 +17,7 @@ type Model interface {
 }
 
 var (
-	path   string                 = "/Users/arun/go/src/arunfung/go2021/edu/data/" // 数据路径
+	path   string
 	suffix string                 = ".sql"
 	models map[string]interface{} // 记录标识 user =》 结构体
 )
@@ -25,7 +26,7 @@ func init() {
 	// 标识绑定注册
 	models = make(map[string]interface{})
 	models["user"] = NewUser
-
+	path = util.GetConfig().GetDataPath()
 	userDatas = make(map[string]Model, 0)
 	rfdata("user", "username", userDatas)
 }
