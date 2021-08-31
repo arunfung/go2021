@@ -8,7 +8,7 @@ import (
 
 type AutoController struct {}
 
-func (c *AutoController) login() bool {
+func (c *AutoController) Login() {
 	fmt.Println("输入用户名")
 	username := util.CRead()
 	fmt.Println("输入密码")
@@ -17,14 +17,15 @@ func (c *AutoController) login() bool {
 
 	if user == nil {
 		fmt.Println("查询不到用户", username)
-		return false
+		return
 	}
 	if user.GetPassword() == password {
 		fmt.Println("登入成功")
-		return true
+		view = "index_view"
+		return
 	} else {
 		fmt.Println("密码错误")
-
-		return false
+		view = "login_view"
+		return
 	}
 }
