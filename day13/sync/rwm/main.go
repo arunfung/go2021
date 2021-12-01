@@ -5,36 +5,38 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strconv"
 	"sync"
 	"time"
 )
 
-var rwmutex sync.RWMutex
-
+var rwlock sync.RWMutex
+var count int
 // 读写锁 比较适合读多，写少的情况
 func main() {
 	file := "../file/1.txt"
-	data := "arun"
+	//data := "arun"
 
 	for i := 0; i < 10; i++ {
 		go func() {
-			rwmutex.RLock() // 加读锁
+			rwlock.RLock() // 加读锁
 			d, _ := ReadFile(file)
 			fmt.Println("d", d)
-			rwmutex.RUnlock() // 释放锁
+			rwlock.RUnlock() // 释放锁
 		}()
 	}
 	for i := 0; i < 3; i ++ {
-		go Oper(file,data)
+		rwlock.Lock() // 加锁
+		//go Oper(file,data)
+		count++
+		fmt.Println("写信息成功 : ", count)
+		WriteFile(file, strconv.Itoa(count))
+		rwlock.Unlock() // 释放锁
 	}
 
-	//go Oper(file,data)
-	//go Oper(file,data)
-	//go Oper(file,data)
 	time.Sleep(1e9)
 }
 func Oper(path, data string) {
-	mutex.Lock() // 加锁
 	d, _ := ReadFile(path)
 	if d == "" {
 		WriteFile(path, data)
@@ -42,7 +44,6 @@ func Oper(path, data string) {
 	} else {
 		fmt.Println("存在信息", d)
 	}
-	mutex.Unlock() // 释放锁
 }
 
 func ReadFile(path string) (string, error) {
