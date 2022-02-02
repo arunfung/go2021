@@ -1,0 +1,34 @@
+version: "3.6"
+
+services:
+  go-server:
+    image: golang:alpine
+    container_name: go-server
+    ports:
+      - "8300:8300"
+      - "3333:3333"
+    volumes:
+      - /Users/arun/go/src/arunfung/go2021/day19/tcp/server:/go/src/tcp/server
+    working_dir: /go/src
+    networks:
+      go:
+        ipv4_address: 172.100.100.100
+    command:
+      - top
+  go-client:
+    image: golang:alpine
+    container_name: go-client
+    volumes:
+      - /Users/arun/go/src/arunfung/go2021/day19/tcp/client:/go/src/tcp/client
+    working_dir: /go/src
+    networks:
+      go:
+        ipv4_address: 172.100.100.200
+    command:
+      - top
+networks:
+  go:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.100.100.0/24
