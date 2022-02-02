@@ -1,0 +1,64 @@
+version: "3.6" # 确定docker-composer文件的版本
+services:
+  # server
+  consul_server_172_10: # 这个表示服务的名称，注意不是容器名称
+    image: consul # 指定容器的镜像
+    container_name: consul_server_172_10 # 容器的名称
+    ports: # 配置容器与宿主机的端口
+      - "8500:8500"
+    networks:
+      go:
+        ipv4_address: 172.100.100.10   #设置ip地址
+    command: consul agent -server -bootstrap-expect 3 -data-dir /tmp/consul -node=consul_server_172_10 -bind=172.100.100.10 -ui -client=0.0.0.0
+
+  consul_server_172_20: # 这个表示服务的名称，注意不是容器名称
+    image: consul # 指定容器的镜像
+    container_name: consul_server_172_20 # 这是容器的名称
+    ports: # 配置容器与宿主机的端口
+      - "8520:8500"
+    networks:
+      go:
+        ipv4_address: 172.100.100.20   #设置ip地址
+    command: consul agent -server -data-dir /tmp/consul -node=consul_server_172_20 -bind=172.100.100.20 -ui -client=0.0.0.0 -join 172.100.100.10
+    depends_on: # 必须要等 consul_server_172_10 这个服务创建完再执行
+      - consul_server_172_10
+
+  consul_server_172_30: # 这个表示服务的名称，注意不是容器名称
+    image: consul # 指定容器的镜像
+    container_name: consul_server_172_30 # 这是容器的名称
+    ports: # 配置容器与宿主机的端口
+      - "8530:8500"
+    networks:
+      go:
+        ipv4_address: 172.100.100.30   #设置ip地址
+    command: consul agent -server -data-dir /tmp/consul -node=consul_server_172_30 -bind=172.100.100.30 -ui -client=0.0.0.0 -join 172.100.100.10
+    depends_on: # 必须要等 consul_server_172_10 这个服务创建完再执行
+      - consul_server_172_10
+
+    # client
+  consul_client_172_40: # 这个表示服务的名称，注意不是容器名称
+    image: consul # 指定容器的镜像
+    container_name: consul_client_172_40 # 这是容器的名称
+    ports: # 配置容器与宿主机的端口
+      - "8540:8500"
+    networks:
+      go:
+        ipv4_address: 172.100.100.40   #设置ip地址
+    command: consul agent -data-dir /tmp/consul -node=consul_client_172_40 -bind=172.100.100.40 -ui -client=172.100.100.40 -join 172.100.100.10
+    depends_on:
+      - consul_server_172_10
+  consul_client_172_50: # 这个表示服务的名称，注意不是容器名称
+    image: consul # 指定容器的镜像
+    container_name: consul_client_172_50 # 这是容器的名称
+    ports: # 配置容器与宿主机的端口
+      - "8550:8500"
+    networks:
+      go:
+        ipv4_address: 172.100.100.50   #设置ip地址
+    command: consul agent -data-dir /tmp/consul -node=consul_client_172_50 -bind=172.100.100.50 -ui -client=172.100.100.50 -join 172.100.100.10
+    depends_on:
+      - consul_server_172_10
+networks:
+  go:
+    external: # 引入外部网络
+      name: go # 外部网络的名称

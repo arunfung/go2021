@@ -4,10 +4,38 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/binary"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net"
+	"net/http"
 )
+
+type Server struct {
+	ID      string
+	Name    string
+	Address string
+	Port    int
+}
+
+func init() {
+	server := &Server{
+		ID:      "go-tcp-server-1",
+		Name:    "go-tcp-server",
+		Address: "172.100.100.100",
+		Port:    3333,
+	}
+	registerConsul(server)
+}
+
+func registerConsul(server *Server) {
+	s, _ := json.Marshal(server) // bytes
+	url := "http://172.100.100.50:8500/v1/agent/service/register"
+	req, _ := http.NewRequest("PUT", url, bytes.NewReader(s))
+	res, _ := http.DefaultClient.Do(req)
+	defer res.Body.Close()
+	fmt.Println(res)
+}
 
 func main() {
 	fmt.Println("启动服务端 ： tcp://0.0.0.0:3333")

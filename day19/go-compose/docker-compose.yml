@@ -28,6 +28,7 @@ services:
       - top
 networks:
   go:
+    name: go
     driver: bridge
     ipam:
       config:
