@@ -1,0 +1,33 @@
+syntax = "proto3";
+// protoc –I . --go_out=plugins=grpc:. ./goods.proto
+package user;
+option go_package = ".;user";
+
+message User {
+  int32 id = 1; // int
+  string name = 2;
+  int32 age = 3;
+  Role role = 4;
+  map<string, string> dict = 5;
+  message Role{
+    int32 id = 1;
+    string role_name = 2;
+    Status status = 3;
+    enum Status {
+      OK = 0;
+      FAIL = 1;
+    }
+  }
+}
+service UserService {
+  rpc Auth(request) returns (response);
+}
+
+message request{
+  string user_id = 1;
+}
+message response {
+  string code = 1;
+  string token = 2;
+  User user = 3;
+}
