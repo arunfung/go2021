@@ -10,7 +10,7 @@ var sendChOnly chan<- string // 单向发送通道
 var recvChOnly <-chan string // 单向获取通道
 
 func main() {
-  	//runtime.GOMAXPROCS(1)
+	//runtime.GOMAXPROCS(1)
 	//go run1()
 	//go run2()
 	//time.Sleep(time.Second)
@@ -39,20 +39,20 @@ func main() {
 	time.Sleep(time.Second)
 }
 
-func run1()  {
+func run1() {
 	fmt.Println("start run1")
 	runtime.Gosched()
 	fmt.Println("end run1")
 }
 
-func run2()  {
+func run2() {
 	fmt.Println("start run2")
 	//runtime.Goexit()
 	runtime.Gosched()
 	fmt.Println("end run2")
 }
 
-func send(ch chan string)  {
+func send(ch chan string) {
 	ch <- "arun"
 	fmt.Println("1")
 	ch <- "arun fung"
@@ -61,7 +61,7 @@ func send(ch chan string)  {
 	fmt.Println("3")
 }
 
-func receive(ch chan string)  {
+func receive(ch chan string) {
 	s := <-ch
 	fmt.Println("s : ", s)
 	fmt.Println("接收通道信息", <-ch) // 阻塞、切换协程

@@ -12,7 +12,7 @@ func main() {
 	listen, err := net.Listen("tcp", "127.0.0.1:3333")
 	if err != nil {
 		fmt.Println("err : ", err)
-		return 
+		return
 	}
 	for {
 		conn, err := listen.Accept()
@@ -24,7 +24,7 @@ func main() {
 	}
 }
 
-func handler(c net.Conn)  {
+func handler(c net.Conn) {
 	defer c.Close()
 	for {
 		var data [1024]byte

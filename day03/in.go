@@ -25,6 +25,6 @@ func (a *AlPay) Order(id int) int {
 	return 300
 }
 
-func p(pay Pay, id int)  {
+func p(pay Pay, id int) {
 	fmt.Println(pay.Order(id))
 }

@@ -6,6 +6,7 @@ import (
 )
 
 var wg sync.WaitGroup
+
 // 筛选奇数和被三整除的数
 func main() {
 	ch := make(chan int)
@@ -16,22 +17,22 @@ func main() {
 	go filter(ch, oddOut, threeOut)
 
 	for {
-		if <- done {
+		if <-done {
 			break
 		}
 		go func(oddOut chan int) {
 			defer wg.Done()
-			fmt.Println("奇数", <- oddOut)
+			fmt.Println("奇数", <-oddOut)
 		}(oddOut)
 		go func(threeOut chan int) {
 			defer wg.Done()
-			fmt.Println("被三整除", <- threeOut)
+			fmt.Println("被三整除", <-threeOut)
 		}(threeOut)
 	}
 	wg.Wait()
 }
 
-func generate(ch chan int, start,end int, done chan bool)  {
+func generate(ch chan int, start, end int, done chan bool) {
 	for i := start; i <= end; i++ {
 		done <- false
 		ch <- i
@@ -40,7 +41,7 @@ func generate(ch chan int, start,end int, done chan bool)  {
 	close(ch)
 }
 
-func filter(ch, oddOut, threeOut chan int)  {
+func filter(ch, oddOut, threeOut chan int) {
 	for {
 		if i, ok := <-ch; ok {
 			if i%2 != 0 {

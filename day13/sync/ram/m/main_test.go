@@ -5,6 +5,7 @@ import (
 	"sync"
 	"testing"
 )
+
 var rwlock sync.Mutex
 var count int
 var wg sync.WaitGroup

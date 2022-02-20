@@ -23,13 +23,13 @@ func (a *AlPay) Order(id int) int {
 	return 300
 }
 
-func main1()  {
+func main1() {
 	//a :=1
 	//b := &a
 	//fmt.Printf("a:%d ptr: %p t:%T \n", a, &a, a)
 	//fmt.Printf("b:%p ptr: %p t:%T \n", b, &b, b)
 
-	var p  Pay
+	var p Pay
 	p = &WeChat{}
 	fmt.Println(p.Order(3))
 

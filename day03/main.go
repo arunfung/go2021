@@ -41,14 +41,14 @@ func main() {
 		fmt.Println(i)
 	}
 }
-func sub() (int, error)  {
-return 9, errors.New("这是new 的异常")
+func sub() (int, error) {
+	return 9, errors.New("这是new 的异常")
 }
 
-func try(fun func(), catch func(err interface{}))  {
+func try(fun func(), catch func(err interface{})) {
 	defer func() {
 		fmt.Println("捕获异常，处理中")
-		if err := recover(); err != nil{
+		if err := recover(); err != nil {
 			fmt.Println("捕获异常")
 			catch(err)
 		}
@@ -64,23 +64,23 @@ func tests() func() {
 	}
 }
 
-func index()  {
+func index() {
 	fmt.Println("ddd")
 }
 
-func sum(a...int)  {
+func sum(a ...int) {
 	fmt.Println(a)
 }
 
 func def() int {
 	// 延迟执行
 	defer index()
-	sum(4,5,6)
-	sum(1,2,3)
+	sum(4, 5, 6)
+	sum(1, 2, 3)
 	fmt.Println("这是 def")
 	return 9
 }
 
-func pa()  {
+func pa() {
 	panic("这是异常")
 }

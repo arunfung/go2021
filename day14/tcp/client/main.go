@@ -13,6 +13,6 @@ func main() {
 	// 2.进行数据的发送接收
 	conn.Write([]byte("hello sever"))
 	var data [1024]byte
-	n,_ := conn.Read(data[:])
+	n, _ := conn.Read(data[:])
 	fmt.Println("n :", string(data[:n]))
 }

@@ -8,6 +8,7 @@ var (
 	instance *uconfig
 	conf     = flag.String("conf", "../etc/config.json", "cmdedu . config")
 )
+
 type uconfig struct {
 	BasePath string `json:"base_path"`
 	DataPath string `json:"data_path"`

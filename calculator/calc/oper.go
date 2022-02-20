@@ -7,7 +7,7 @@ import (
 
 var opers map[string]interface{}
 
-func init()  {
+func init() {
 	opers = make(map[string]interface{}, 0)
 	opers["+"] = NewAdd
 	opers["-"] = NewSub

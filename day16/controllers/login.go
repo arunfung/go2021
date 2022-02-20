@@ -28,4 +28,3 @@ func (c *LoginController) Post() {
 	c.Data["json"] = res
 	c.ServeJSON()
 }
-

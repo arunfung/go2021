@@ -15,8 +15,8 @@ var mutex sync.Mutex
 func main() {
 	file := "../file/1.txt"
 	data := "arun"
-	for i := 0; i < 10; i ++ {
-		go Oper(file,data)
+	for i := 0; i < 10; i++ {
+		go Oper(file, data)
 	}
 
 	//go Oper(file,data)

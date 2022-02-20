@@ -8,9 +8,10 @@ import (
 )
 
 var inputReader *bufio.Reader
+
 type Cfunc func() (bool, error)
 
-func init()  {
+func init() {
 	inputReader = bufio.NewReader(os.Stdin)
 }
 
@@ -20,7 +21,7 @@ func (c Cfunc) call() (bool, error) {
 
 func CRead() string {
 	input, _ := inputReader.ReadString('\n')
-	return strings.TrimSpace(strings.TrimSuffix(input,"\n"))
+	return strings.TrimSpace(strings.TrimSuffix(input, "\n"))
 }
 
 // 格式化输出

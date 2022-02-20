@@ -6,6 +6,7 @@ import (
 )
 
 var wg sync.WaitGroup
+
 func main() {
 	ch := make(chan string)
 	done := make(chan []string)
@@ -23,10 +24,10 @@ func main() {
 		}
 		fmt.Println("data:", data)
 		done <- data
-	}(data,ch,done)
+	}(data, ch, done)
 
-	wg.Wait() // 在添加的协程个数，执行完之后就会取消阻塞
-	close(ch) // 这是关闭ch通道
+	wg.Wait()                     // 在添加的协程个数，执行完之后就会取消阻塞
+	close(ch)                     // 这是关闭ch通道
 	fmt.Println("<-done", <-done) // 需要在 done 通道有信息的时候才执行
 }
 

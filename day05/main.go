@@ -7,7 +7,7 @@ import (
 
 type Stu struct {
 	name string
-	age int
+	age  int
 }
 
 func main() {
@@ -18,9 +18,8 @@ func main() {
 		f := s.Field(i)
 
 		fmt.Printf("%d: %s %s = %v\n", i,
-			typeOfT.Field(i).Name, f.Type(),f)
+			typeOfT.Field(i).Name, f.Type(), f)
 	}
-
 
 	//var v int = 10
 	//fmt.Println(v)

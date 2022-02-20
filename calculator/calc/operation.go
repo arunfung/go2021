@@ -8,10 +8,10 @@ type Operation struct {
 	num2 int
 }
 
-func (o *Operation) SetNum1(num int)  {
+func (o *Operation) SetNum1(num int) {
 	o.num1 = num
 }
-func (o *Operation) SetNum2(num int)  {
+func (o *Operation) SetNum2(num int) {
 	o.num2 = num
 }
 
@@ -25,6 +25,7 @@ func (o *Operation) GetNum2() int {
 type OperationAdd struct {
 	oper *Operation
 }
+
 func NewAdd(num1, num2 int) *OperationAdd {
 	return &OperationAdd{
 		oper: &Operation{
@@ -33,9 +34,11 @@ func NewAdd(num1, num2 int) *OperationAdd {
 		},
 	}
 }
+
 type OperationSub struct {
 	oper *Operation
 }
+
 func NewSub(num1, num2 int) *OperationSub {
 	return &OperationSub{
 		oper: &Operation{
@@ -44,9 +47,11 @@ func NewSub(num1, num2 int) *OperationSub {
 		},
 	}
 }
+
 type OperationMul struct {
 	oper *Operation
 }
+
 func NewMul(num1, num2 int) *OperationMul {
 	return &OperationMul{
 		oper: &Operation{
@@ -55,9 +60,11 @@ func NewMul(num1, num2 int) *OperationMul {
 		},
 	}
 }
+
 type OperationDiv struct {
 	oper *Operation
 }
+
 func NewDiv(num1, num2 int) *OperationDiv {
 	return &OperationDiv{
 		oper: &Operation{

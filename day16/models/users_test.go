@@ -10,7 +10,7 @@ import (
 
 func TestMain(m *testing.M) {
 	orm.RegisterDataBase("default", "mysql",
-		fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4", "root","root123456","127.0.0.1",3306,"go"))
+		fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4", "root", "root123456", "127.0.0.1", 3306, "go"))
 	orm.Debug = true
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	m.Run()
@@ -65,7 +65,7 @@ func TestFindRoleById(t *testing.T) {
 			name: "get role",
 			args: args{id: 1},
 			want: &UserRole{
-				Id: 1,
+				Id:   1,
 				Name: "管理员",
 				Desc: "管理员",
 			},

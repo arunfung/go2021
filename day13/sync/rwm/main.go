@@ -12,6 +12,7 @@ import (
 
 var rwlock sync.RWMutex
 var count int
+
 // 读写锁 比较适合读多，写少的情况
 func main() {
 	file := "../file/1.txt"
@@ -25,7 +26,7 @@ func main() {
 			rwlock.RUnlock() // 释放锁
 		}()
 	}
-	for i := 0; i < 3; i ++ {
+	for i := 0; i < 3; i++ {
 		rwlock.Lock() // 加锁
 		//go Oper(file,data)
 		count++

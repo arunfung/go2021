@@ -16,13 +16,13 @@ type MySlice struct {
 }
 
 func NewMySlice(len, cap int) *MySlice {
-	var  ar [10]int
+	var ar [10]int
 	return &MySlice{
-		ptr:&ar,
-		len:len,
-		cap:cap,
-		arr:Arr{
-			name:"arunfung",
+		ptr: &ar,
+		len: len,
+		cap: cap,
+		arr: Arr{
+			name: "arunfung",
 		},
 	}
 }
@@ -32,5 +32,4 @@ func (m *MySlice) GetLen() int {
 }
 
 type name interface {
-	
 }

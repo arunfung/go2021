@@ -28,7 +28,6 @@ func filter(in, out chan int, prime int) {
 	}
 }
 
-
 func main() {
 	ch := make(chan int) // Create a new channel.
 	go generate(ch)      // Start generate() as a goroutine.

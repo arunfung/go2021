@@ -29,6 +29,6 @@ func main() {
 	// 2.进行数据的发送接收
 	conn.Write(data)
 	var pack [1024]byte
-	n,_ := conn.Read(pack[:])
+	n, _ := conn.Read(pack[:])
 	fmt.Println("n :", string(pack[:n]))
 }

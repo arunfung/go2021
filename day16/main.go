@@ -12,6 +12,7 @@ func main() {
 	beego.InsertFilter("/*", beego.BeforeRouter, FilterUser)
 	beego.Run()
 }
+
 var FilterUser = func(ctx *context.Context) {
 	_, ok := ctx.Input.Session("uid").(int)
 	if !ok && ctx.Request.RequestURI != "/login" {
@@ -19,4 +20,3 @@ var FilterUser = func(ctx *context.Context) {
 		fmt.Println("跳转")
 	}
 }
-

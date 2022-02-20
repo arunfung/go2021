@@ -11,10 +11,10 @@ import (
 func main() {
 	file := "file/1.txt"
 	data := "arun"
-	go Oper(file,data)
-	go Oper(file,data)
-	go Oper(file,data)
-	go Oper(file,data)
+	go Oper(file, data)
+	go Oper(file, data)
+	go Oper(file, data)
+	go Oper(file, data)
 	time.Sleep(1e9)
 }
 func Oper(path, data string) {

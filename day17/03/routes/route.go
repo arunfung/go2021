@@ -6,7 +6,7 @@ type Router func(engine *gin.Engine)
 
 var routers = []Router{}
 
-func RegisterRoute(routes ...Router)  {
+func RegisterRoute(routes ...Router) {
 	routers = append(routers, routes...)
 }
 

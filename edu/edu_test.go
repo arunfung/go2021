@@ -29,9 +29,9 @@ type Config struct {
 
 func TestJson(t *testing.T) {
 	c := Config{"DataPath", "BasePath"}
-	cj,_ := json.Marshal(c)
+	cj, _ := json.Marshal(c)
 	fmt.Println(string(cj))
-	cj1,_ := json.MarshalIndent(c, "", "    ")
+	cj1, _ := json.MarshalIndent(c, "", "    ")
 	fmt.Println(string(cj1))
 
 	js := `{"data_path":"路径","base_path":"路径"}`

@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-type AutoController struct {}
+type AutoController struct{}
 
 func (c *AutoController) Login() {
 	fmt.Println("输入用户名")
