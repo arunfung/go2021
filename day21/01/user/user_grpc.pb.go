@@ -97,5 +97,5 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "01/user/user.proto",
+	Metadata: "day21/01/user/user.proto",
 }
