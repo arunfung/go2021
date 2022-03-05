@@ -3,10 +3,10 @@ package main
 import (
 	pb "day21/proto/goods" // 引入编译生成的包
 	"fmt"
-	"net" // 引入编译生成的包
-
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+	"net" // 引入编译生成的包
 )
 
 const (
@@ -33,12 +33,14 @@ func main() {
 		fmt.Println("err : ", err)
 	}
 
-	//creds, _ := credentials.NewServerTLSFromFile("../../keys/server.pem", "../../keys/server.key")
+	cer := "../../keys/server.pem"
+	key := "../../keys/server.key"
+	creds, _ := credentials.NewServerTLSFromFile(cer, key)
 	// 实例化grpc server
-	//s := grpc.NewServer(grpc.Creds(creds))
-	s := grpc.NewServer()
+	s := grpc.NewServer(grpc.Creds(creds))
+	//s := grpc.NewServer()
 	// 注册服务
-	pb.RegisterGoodsServiceServer(s, GoodsServices)
+	pb.RegisterGoodsServiceServer(s, &GoodsService{})
 
 	// grpc监听端口和地址
 	fmt.Println("listen on : " + ADDRESS)

@@ -3,9 +3,9 @@ package main
 import (
 	pb "day21/proto/goods" // 引入编译生成的包
 	"fmt"
-
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 )
 
@@ -15,12 +15,11 @@ const (
 )
 
 func main() {
-
-	//creds, _ := credentials.NewClientTLSFromFile("../../keys/server.pem", "locahost")
-	//
-	//conn, err := grpc.Dial(Address, grpc.WithTransportCredentials(creds))
+	cer := "../../keys/server.pem"
+	creds, _ := credentials.NewClientTLSFromFile(cer, "")
+	conn, err := grpc.Dial(Address, grpc.WithTransportCredentials(creds))
 	// 连接
-	conn, err := grpc.Dial(Address, grpc.WithInsecure())
+	//conn, err := grpc.Dial(Address, grpc.WithInsecure())
 	if err != nil {
 		grpclog.Fatalln(err)
 	}
