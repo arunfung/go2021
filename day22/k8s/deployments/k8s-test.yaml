@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: k8s-test
+  name: k8s-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-test
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: k8s-test
+    spec:
+      containers:
+        - image: go-test-image:latest
+          name: go-test-image
+          ports:
+            - containerPort: 3333
+          resources: {}
+          imagePullPolicy: Never
