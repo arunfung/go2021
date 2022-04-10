@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+// protoc --proto_path=. --go_out=. --micro_out=. goods.proto
+
+package goods;
+
+option go_package = ".;goods";
+
+message ResponseGoods {
+  int32 code = 1;
+  string msg = 2;
+  bytes data = 3; // []byte
+}
+
+message RequestGoods{
+  int32 GoodsId = 1;
+}
+
+service GoodsService {
+  rpc GetGoodsDetail(RequestGoods) returns (ResponseGoods);
+}
