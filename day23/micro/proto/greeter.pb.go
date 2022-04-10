@@ -4,6 +4,8 @@
 // 	protoc        v3.19.4
 // source: greeter.proto
 
+// protoc --proto_path=. --go_out=. --micro_out=. greeter.proto
+
 package greeter
 
 import (

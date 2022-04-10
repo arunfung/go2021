@@ -18,5 +18,5 @@ func main() {
 		Name: "arunfung",
 	})
 	fmt.Println("res : ", res)
-	fmt.Println("err ； ", err)
+	fmt.Println("err : ", err)
 }
