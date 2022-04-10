@@ -2,8 +2,6 @@ package services
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 	"frame/models"
 	proto "frame/proto"
 )
@@ -17,11 +15,14 @@ func (r *RequestGoods) GetGoodsDetail(ctx context.Context, req *proto.RequestGoo
 	}
 	var goods models.Goods
 	models.DB().Debug().Where(where).Unscoped().Find(&goods)
-	jsonBytes, _ := json.Marshal(goods)
-	fmt.Println("GetGoodsDetail")
+	data := &proto.GoodsInfo{
+		ShopId:     goods.ShopId,
+		CategoryId: goods.CategoryId,
+		GoodName:   goods.GoodName,
+	}
 
 	res.Code = 200
 	res.Msg = "成功"
-	res.Data = jsonBytes
+	res.Data = data
 	return nil
 }
