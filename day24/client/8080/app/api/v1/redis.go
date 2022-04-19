@@ -3,6 +3,7 @@ package v1
 import (
 	proto "client/proto"
 	"client/rpc"
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -54,4 +55,22 @@ func Gredis(c *gin.Context) {
 	_ = json.Unmarshal([]byte(data), goodsInfo)
 
 	c.JSON(http.StatusOK, goodsInfo)
+}
+
+func Demotion(id int) *proto.ResponseGoods {
+	// 连接
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "", // no password set
+		DB:       0,  // use default DB
+	})
+	defer rdb.Close()
+
+	key := fmt.Sprintf(goodsKey, id)
+	// 写入数据
+	data, _ := rdb.Get(context.Background(), key).Result()
+	goodsInfo := &proto.ResponseGoods{}
+
+	_ = json.Unmarshal([]byte(data), goodsInfo)
+	return goodsInfo
 }

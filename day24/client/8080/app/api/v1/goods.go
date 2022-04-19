@@ -25,7 +25,11 @@ func GetGoods(c *gin.Context) {
 	err = hystrix.Do("goodsHy", func() error {
 		goodsInfo, err = rpc.GetGoodsDetail(goodsId)
 		return err
-	}, nil)
+	}, func(err error) error {
+		// 降级从缓存读取
+		goodsInfo = Demotion(goodsId)
+		return nil
+	})
 
 	// err 的异常情况 hystrix：熔断、 程序调用rpc出现服务异常
 	if err != nil {
