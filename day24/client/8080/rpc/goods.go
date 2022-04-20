@@ -2,6 +2,7 @@ package rpc
 
 import (
 	proto "client/proto"
+	"client/wrapper/hystrix"
 	"client/wrapper/login"
 	"context"
 	"fmt"
@@ -12,8 +13,10 @@ import (
 var goodsCli proto.GoodsService
 
 func init() {
+	hystrix.ConfigureDefault(hystrix.CommandConfig{Timeout: 4000})
 	microClient := micro.NewService(
 		micro.Name("goods.client"),
+		micro.WrapClient(hystrix.NewClientWrapper()),
 		micro.WrapClient(login.NewClientWrapper()),
 	)
 	// 创建客户端
