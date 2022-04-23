@@ -11,7 +11,6 @@ import (
 var consulReg registry.Registry
 
 func init() {
-	// 注册服务
 	consulReg = consul.NewRegistry(
 		registry.Addrs("127.0.0.1:8500"),
 	)
@@ -21,7 +20,7 @@ func Run() {
 	// 创建服务
 	service := micro.NewService(
 		micro.Name("goods"),
-		micro.Address(":8501"),
+		micro.Address(":8502"),
 		micro.Registry(consulReg),
 	)
 	//初始化服务

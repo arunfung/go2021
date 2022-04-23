@@ -25,7 +25,7 @@ func (r *RequestGoods) GetGoodsDetail(ctx context.Context, req *proto.RequestGoo
 	}
 
 	res.Code = 200
-	res.Msg = "成功-8501"
+	res.Msg = "成功-8502"
 	res.Data = data
 	return nil
 }
